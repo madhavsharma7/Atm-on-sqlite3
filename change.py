@@ -8,29 +8,27 @@ win.geometry("510x420")
 win.title("Welcome to the Change pin")
 win.resizable(False,False)
 
-load=Image.open('E:\Summer Internship\ATM projects\ch.jpg')
+load=Image.open('ch.jpg')
 render=ImageTk.PhotoImage(load)
 img=Label(win,image=render)
 img.place(x=0,y=0)
 
-
 def insert():
-    a=str(num.get())
-    b=str(num1.get())
-    c=str(num2.get())
-    d=str(num3.get())
-
+   #a=str(num.get())
+   #b=str(num1.get())
+   #c=str(num2.get())
+   #d=str(num3.get())
+    conn = sqlite3.connect(database=r'bank.db')
+    mydb=conn.cursor()
     try:
-        if(c==d):
-            conn = sqlite3.connect(database=r'bank.db')
-            mydb.execute("update depos set Enter_Pin='"+c+"' where Enter_Pin='"+b+"'")
+        if(num2.get()==num3.get()):
+            mydb.execute("update deposit set pin='"+num2.get()+"' where pin='"+num1.get()+"'")
             conn.commit()
             messagebox.showinfo("Message","Pin Updated")
         else:
-            messagebox.showinfo("Message","Not Match")
+            messagebox.showinfo("Message","Pin Not Match")
     except:
-        conn.rollback()
-        print("Not Changed")
+        messagebox.showwarning("Message","There was some Error")
     conn.close()
 
 

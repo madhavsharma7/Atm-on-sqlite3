@@ -15,14 +15,14 @@ img.place(x=0,y=0)
 
 
 def mini():
-    a=st.get()
+   #a=st.get()
     win2=Frame(win).place(x=80,y=200)
     conn = sqlite3.connect(database=r'bank.db')
-    mydb.execute("select * from type where Enter_Card_Number='"+a+"'")
+    mydb=conn.cursor()
+    mydb.execute("select * from type where card_number='"+st.get()+"'")
     result=mydb.fetchall()
     count=mydb.rowcount
-    print(result)
-    print(count)
+
     num=5
     tx=Text(win2,font="vendata 20",width=60,height=count+5)
     tx.insert(END,"\n\tCard_Number\t\tAmount\t\tType")
@@ -31,11 +31,10 @@ def mini():
         tx.insert(END,"\t\t\n\t{0}\t\t{1}\t\t{2}".format(i[0],i[1],i[2]))
         num+=1
     
-lb=Label(win,text="Enter_Card_Number",font=35,width=28).place(x=10,y=10)
+lb=Label(win,text="Enter Card Number",font=35,width=28).place(x=10,y=10)
 
 st=StringVar()
 tx=Entry(win,width=20,font=30,textvariable=st).place(x=330,y=10)
 btn=Button(win,command=mini,text="Show",width=20,font=30,bd=10,relief="raised").place(x=300,y=90)
-
 
 win.mainloop()

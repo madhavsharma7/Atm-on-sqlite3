@@ -13,108 +13,76 @@ render=ImageTk.PhotoImage(load)
 img=Label(win,image=render)
 img.place(x=0,y=0)
 
-
-
 def cash1():
-    a=num1.get()
-    b=num2.get()
+   #a=num1.get()
+   #b=num2.get()
     amount='2000'
     atmtype="Fast Cash"
+    conn = sqlite3.connect(database=r'bank.db')
+    mydb=conn.cursor()
     try:
-        conn = sqlite3.connect(database=r'bank.db')
-        mydb=conn.cursor()
-        mydb.execute("select * from depos where Enter_Card_Number='"+a+"'")
-        mydb.execute("insert into type(Enter_Card_Number,Enter_Amount,type) values ('"+a+"','"+amount+"','"+atmtype+"')")
-        mydb.execute("update depos set Enter_Amount=Enter_Amount - 100 where Enter_Pin='"+b+"'")
+        mydb.execute("insert into type(card_number,amount,type) values ('"+num1.get()+"','"+amount+"','"+atmtype+"')")
+        mydb.execute("update deposit set amount=amount - 100 where pin='"+num2.get()+"'")
         conn.commit()
-        result=mydb.fetchall()
-        count=mydb.rowcount
-        print(result)
-        print(count)
-        if count>0:
-            messagebox.showinfo("Message","Rs 2000 Withdrawed")
-        else:
-            messagebox.showerror("Message","Failed")
+        messagebox.showinfo("Message","Rs 100 Withdrawed") 
     except:
-        conn.rollback()
-        messagebox.showinfo("Message","Not Withdrawed")
+        messagebox.showwarning("Error","Failed")
     conn.close()
 
 def cash2():
-    a=num1.get()
-    b=num2.get()
+   #a=num1.get()
+   #b=num2.get()
     amount='5000'
     atmtype="Fast Cash"
+    conn = sqlite3.connect(database=r'bank.db')
+    mydb=conn.cursor()
     try:
-        conn = sqlite3.connect(database=r'bank.db')
-        mydb.execute("select * from depos where Enter_Card_Number='"+a+"'")
-        mydb.execute("insert into type(Enter_Card_Number,Enter_Amount,type) values ('"+a+"','"+amount+"','"+atmtype+"')")
-        mydb.execute("update depos set Enter_Amount = Enter_Amount - 200 where Enter_Pin='"+b+"'")
+        mydb.execute("insert into type(card_number,amount,type) values ('"+num1.get()+"','"+amount+"','"+atmtype+"')")
+        mydb.execute("update deposit set amount = amount - 200 where pin='"+num2.get()+"'")
         conn.commit()
-        result=mydb.fetchall()
-        count=mydb.rowcount
-        print(result)
-        print(count)
-        if count>0:
-            messagebox.showinfo("Message","Rs 5000 Withdrawed")
-        else:
-            messagebox.showerror("Message","Failed")
+        messagebox.showinfo("Message","Rs 200 Withdrawed")
+        
     except:
-        conn.rollback()
-        messagebox.showinfo("Message","Not Withdrawed")
+        messagebox.showwarning("Error","Failed")
     conn.close()
     
 def cash3():
-    a=num1.get()
-    b=num2.get()
+   #a=num1.get()
+   #b=num2.get()
     amount='7000'
     atmtype="Fast Cash"
+    conn = sqlite3.connect(database=r'bank.db')
+    mydb=conn.cursor()
     try:
-        conn = sqlite3.connect(database=r'bank.db')
-        mydb.execute("select * from depos where Enter_Card_Number='"+a+"'")
-        mydb.execute("insert into type(Enter_Card_Number,Enter_Amount,type) values ('"+a+"','"+amount+"','"+atmtype+"')")
-        mydb.execute("update depos set Enter_Amount = Enter_Amount - 500 where Enter_Pin='"+b+"'")
+        mydb.execute("select * from deposit where card_number='"+num1.get()+"'")
+        mydb.execute("insert into type(card_number,amount,type) values ('"+num1.get()+"','"+amount+"','"+atmtype+"')")
+        mydb.execute("update deposit set amount = amount - 500 where pin='"+num2.get()+"'")
         conn.commit()
-        result=mydb.fetchall()
-        count=mydb.rowcount
-        print(result)
-        print(count)
-        if count>0:
-            messagebox.showinfo("Message","Rs 7000 Withdrawed")
-        else:
-            messagebox.showerror("Message","Failed")
+        messagebox.showinfo("Message","Rs 500 Withdrawed")
+
     except:
-        conn.rollback()
-        messagebox.showinfo("Message","Not Withdrawed")
+        messagebox.showwarning()("Message","Failed")
     conn.close()
 
 def cash4():
-    a=num1.get()
-    b=num2.get()
+   #a=num1.get()
+   #b=num2.get()
     amount='10000'
     atmtype="Fast Cash"
+    conn = sqlite3.connect(database=r'bank.db')
+    mydb=conn.cursor()
     try:
-        conn = sqlite3.connect(database=r'bank.db')
-        mydb.execute("select * from depos where Enter_Card_Number='"+a+"'")
-        mydb.execute("insert into type(Enter_Card_Number,Enter_Amount,type) values ('"+a+"','"+amount+"','"+atmtype+"')")
-        mydb.execute("update depos set Enter_Amount = Enter_Amount - 2000 where Enter_Pin='"+b+"'")
+        mydb.execute("insert into type(card_number,amount,type) values ('"+num1.get()+"','"+amount+"','"+atmtype+"')")
+        mydb.execute("update deposit set amount = amount - 2000 where pin='"+num2.get()+"'")
         conn.commit()
-        result=mydb.fetchall()
-        count=mydb.rowcount
-        print(result)
-        print(count)
-        if count>0:
-            messagebox.showinfo("Message","Rs 10000 Withdrawed")
-        else:
-            messagebox.showerror("Message","Faileds")
+        messagebox.showinfo("Message","Rs 2000 Withdrawed")
     except:
-        conn.rollback()
-        messagebox.showinfo("Message","Not Withdrawed")
+        messagebox.showwarning("Message","Failed")
     conn.close()
 
 
-lb=Label(win,text="Enter card number ",font=20,width=20).grid(row=0,column=0,padx=20,pady=20)
-lb2=Label(win,text="Enter pin",font=20,width=10).grid(row=1,column=0,padx=20,pady=20)
+lb=Label(win,text="Enter Card Number ",font=20,width=20).grid(row=0,column=0,padx=20,pady=20)
+lb2=Label(win,text="Enter Pin",font=20,width=10).grid(row=1,column=0,padx=20,pady=20)
 
 num1=StringVar()
 tx=Entry(win,font=10,width=20,textvariable=num1).grid(row=0,column=1)

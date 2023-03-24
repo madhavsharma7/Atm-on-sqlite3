@@ -15,32 +15,23 @@ img.place(x=0,y=0)
 
 
 def wit():
-    
-    a=num1.get()
-    b=num2.get()
-    c=num3.get()
+   #a=num1.get()
+   #b=num2.get()
+   #c=num3.get()
     atmtype="Withdraw"
+    conn = sqlite3.connect(database=r'bank.db')
+    mydb=conn.cursor()
     try:
-        conn = sqlite3.connect(database=r'bank.db')
-        mydb.execute("select * from depos where Enter_Card_Number='"+a+"'")
-        mydb.execute("insert into type(Enter_Card_Number,Enter_Amount,type) values ('"+a+"','"+c+"','"+atmtype+"')")
-        mydb.execute("update depos set Enter_Amount = Enter_Amount - '"+c+"' where Enter_Card_Number='"+a+"'")
+        mydb.execute("insert into type(card_number,amount,type) values ('"+num1.get()+"','"+num3.get()+"','"+atmtype+"')")
+        mydb.execute("update deposit set amount = amount - '"+num3.get()+"' where card_number='"+num1.get()+"'")
         conn.commit()
-        result=mydb.fetchall()
-        count=mydb.rowcount
-        print(result)
-        print(count)
-        if count>0:
-            messagebox.showinfo("Message","Withdraw")
-        else:
-            messagebox.showerror("Message","Check Card Number")
+        messagebox.showinfo("Message","Withdraw")
     except:
-        conn.rollback()
-        messagebox.showerror("Message","Not deposited")
+        messagebox.showerror("Error","There was some error")
     conn.close()    
 
 
-lb=Label(win,text="Enter_Card_Number",width=17,font=20).grid(row=0,column=0,padx=10,pady=10)
+lb=Label(win,text="Enter Card Number",width=17,font=20).grid(row=0,column=0,padx=10,pady=10)
 lb2=Label(win,text="Enter Pin",width=15,font=20).grid(row=1,column=0,padx=10,pady=10)
 lb3=Label(win,text="Enter Amount",width=15,font=20).grid(row=3,column=0,padx=10,pady=10)
 
