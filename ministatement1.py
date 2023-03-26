@@ -13,7 +13,6 @@ render=ImageTk.PhotoImage(load)
 img=Label(win,image=render)
 img.place(x=0,y=0)
 
-
 def mini():
    #a=st.get()
     win2=Frame(win).place(x=80,y=200)
@@ -22,9 +21,10 @@ def mini():
     mydb.execute("select * from type where card_number='"+st.get()+"'")
     result=mydb.fetchall()
     count=mydb.rowcount
+    num=10
 
-    num=5
-    tx=Text(win2,font="vendata 20",width=60,height=count+5)
+    tx=Text(win2,font="arial",width=60,height=count+15)
+    tx.insert(END,"\t\t\tHMB Bank Statement")
     tx.insert(END,"\n\tCard_Number\t\tAmount\t\tType")
     tx.place(x=num,y=200)
     for i in result:

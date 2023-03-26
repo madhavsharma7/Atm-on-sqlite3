@@ -14,7 +14,6 @@ render=ImageTk.PhotoImage(load)
 img=Label(win,image=render)
 img.place(x=0,y=0)
 
-
 lb=Label(win,text="Select the Option",width=30,height=2,font=7).place(x=50,y=40)
 
 bt1=Button(win,text="HDFC",command=bank,font=20,width=10,bd=10,relief="raised").place(x=50,y=150)

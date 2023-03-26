@@ -13,35 +13,33 @@ img=Label(win,image=render)
 img.place(x=0,y=0)
 
 def transfer():
-    a=str(num1.get())
-    b=str(num2.get())
-    c=str(num3.get())
-    d=str(num4.get())
-    e=str(num5.get())
+   #a=str(num1.get())
+   #b=str(num2.get())
+   #c=str(num3.get())
+   #d=str(num4.get())
+   #e=str(num5.get())
     atmtype="Transfer"
-    
+    conn = sqlite3.connect(database=r'bank.db')
+    mydb=conn.cursor()
     try:
-        conn = sqlite3.connect(database=r'bank.db')
-        mydb.execute("insert into type(Enter_Card_Number,Enter_Amount,type) values ('"+a+"','"+c+"','"+atmtype+"')")
-        mydb.execute("update depos set Enter_Amount = Enter_Amount - '"+c+"' where Enter_Pin='"+b+"'")
-        mydb.execute("insert into bank(Card_Number_To,Enter_Pin,Enter_Amount) values ('"+d+"','"+b+"','"+c+"')")
-        #mydb.execute("update bank set Enter_Amount = Enter_Amount + '"+c+"' where Card_Number_To ='"+d+"'")
+        mydb.execute("insert into type(card_number,amount,type) values ('"+num1.get()+"','"+num3.get()+"','"+atmtype+"')")
+        mydb.execute("update deposit set amount = amount - '"+num3.get()+"' where pin='"+num2.get()+"'")
+        mydb.execute("insert into bank(card_number_to,pin,amount) values ('"+num4.get()+"','"+num2.get()+"','"+num3.get()+"')")
         conn.commit()
         messagebox.showinfo("Message","Transfed")
     except:
-        conn.rollback()
-        messagebox.showinfo("Message","Not Transfered")
+        messagebox.showerror("Error","Check your Details")
     conn.close()
 
-lb=Label(win,text="Enter_Card_Number_From",font=20,width=25).grid(row=0,column=0,padx=20,pady=20)
+lb=Label(win,text="Enter Card Number From",font=20,width=25).grid(row=0,column=0,padx=20,pady=20)
 
-lb2=Label(win,text="Enter_Pin",font=20,width=10).grid(row=1,column=0,padx=20,pady=20)
+lb2=Label(win,text="Enter Pin",font=20,width=10).grid(row=1,column=0,padx=20,pady=20)
 
-lb3=Label(win,text="Enter_Amount",font=20,width=15).grid(row=2,column=0,padx=20,pady=20)
+lb3=Label(win,text="Enter Amount",font=20,width=15).grid(row=2,column=0,padx=20,pady=20)
 
-lb4=Label(win,text="Enter_Card_Number_To",font=20,width=20).grid(row=3,column=0,padx=20,pady=20)
+lb4=Label(win,text="Enter Card Number To",font=20,width=20).grid(row=3,column=0,padx=20,pady=20)
 
-lb5=Label(win,text="Enter_IFSC",font=20,width=10).grid(row=4,column=0,padx=20,pady=20)
+lb5=Label(win,text="Enter IFSC",font=20,width=10).grid(row=4,column=0,padx=20,pady=20)
 
 num1=StringVar()
 tx=Entry(win,font=10,width=20,textvariable=num1).grid(row=0,column=1)

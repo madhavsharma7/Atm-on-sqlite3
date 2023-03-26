@@ -13,22 +13,21 @@ img=Label(win,image=render)
 img.place(x=0,y=0)
 
 def update():
-    a=str(num.get())
+    '''a=str(num.get())
     b=str(num1.get())
     c=str(num2.get())
     d=str(num3.get())
-    e=str(num4.get())
-
+    e=str(num4.get())'''
+    conn = sqlite3.connect(database=r'bank.db')
+    mydb=conn.cursor()
     try:
-        if(e==d):
-            conn = sqlite3.connect(database=r'bank.db')
-            mydb.execute("update depos set contact='"+d+"' where contact='"+c+"'")
+        if(num4.get()==num3.get()):
+            mydb.execute("update deposit set contact='"+num3.get()+"' where contact='"+num2.get()+"'")
             conn.commit()
             messagebox.showinfo("Message","Contact Updated")
         else:
-            messagebox.showinfo("Message","Not Match")
+            messagebox.showinfo("Message","Contact Not Match")
     except:
-        conn.rollback()
         print("Not Changed")
     conn.close()
 

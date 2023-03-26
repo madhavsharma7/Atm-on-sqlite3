@@ -28,7 +28,7 @@ def insert():
 
 frame=Frame(win,bd=10,relief="raised",width=400,height=50)
 frame.grid(row=0)
-lb=Label(frame,font=('arial',15,'bold'),text="FORGET PASSWORD").grid(row=0)
+lb=Label(frame,font=('arial',15,'bold'),text="FORGET PASSWORD").place(x=100,y=0)
 
 lb=Label(win,font=('arial',10,'bold'),text="First Name",width=16).place(x=20,y=100)
 lb2=Label(win,font=('arial',10,'bold'),text="Last Name",width=16).place(x=20,y=150)
