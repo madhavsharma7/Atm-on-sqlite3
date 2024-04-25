@@ -8,7 +8,7 @@ The Banking Assistance System is a Python application built with the Tkinter lib
 - Bank Account Creation: Set up bank accounts linked to personal accounts.
 - Deposit: Add funds to the bank account.
 - Withdrawal: Withdraw funds from the bank account.
-- Fast Cash: Transfer preset amounts of money quickly (e.g., 500, 2000, 100).
+- Fast Cash: Transfer preset amounts of money quickly (e.g., 100, 200, 500 & 2000).
 - Statement Check: View transaction history by entering the card number associated with the bank account.
 
 ## Technologies Used
